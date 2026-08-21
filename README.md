@@ -1,49 +1,140 @@
-# AI Workplace Companion
 
-Build a modern, responsive web application called “AI Workplace Productivity Assistant” that helps professionals automate daily work tasks using AI. 
+# AI Workplace Productivity Assistant
 
- 
+A modern, responsive web application designed to help enterprise professionals automate repetitive daily workflows using structured AI prompts and task-oriented tooling.
 
-The application should have a clean, professional UI with a dashboard layout, sidebar navigation, and interactive components. 
+---
 
- 
+### Project Overview
 
-Core Features: 
-Smart Email Generator (tone + audience-based)  
-Meeting Notes Summarizer (key points, actions, deadlines)  
-AI Task Planner (prioritization + scheduling)  
-AI Research Assistant (insights + summaries)  
-AI Chatbot Interface  
-Requirements: 
-Use structured prompt engineering for each feature  
-Ensure professional, clear AI outputs  
-Include loading states and responsive design  
-Add disclaimer: “AI-generated content may require human review”  
-Design Style: 
-Modern SaaS UI (clean, minimal, professional)  
-Sidebar navigation + card-based layout  
-Output: 
-A fully functional prototype with interactive UI and AI-powered features.
+The **AI Workplace Productivity Assistant** provides an all-in-one suite of AI-driven utilities tailored for corporate communications, meeting operations, project planning, market synthesis, and ad-hoc task assistance.
 
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://insightly-assistant.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/cdd67044-cf64-4cbf-82b6-a35d323ac86d).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
 ```
+ai-workplace-assistant/
+├── public/
+│   └── favicon.ico
+├── src/
+│   ├── components/
+│   │   ├── Sidebar.tsx
+│   │   ├── Header.tsx
+│   │   ├── DisclaimerBanner.tsx
+│   │   └── tools/
+│   │       ├── EmailGenerator.tsx
+│   │       ├── MeetingSummarizer.tsx
+│   │       ├── TaskPlanner.tsx
+│   │       ├── ResearchAssistant.tsx
+│   │       └── CopilotChat.tsx
+│   ├── prompts/
+│   │   ├── emailPrompts.ts
+│   │   ├── meetingPrompts.ts
+│   │   ├── taskPrompts.ts
+│   │   └── researchPrompts.ts
+│   ├── types/
+│   │   └── index.ts
+│   ├── App.tsx
+│   └── main.tsx
+├── package.json
+├── tsconfig.json
+└── README.md
+
+```
+
+---
+
+### Key Features
+
+| Tool | Core Capability | Output Deliverables |
+| --- | --- | --- |
+| **Smart Email Generator** | Generates context-aware drafts based on target audience and tone | Structured email draft with subject line, greeting, CTA, and sign-off |
+| **Meeting Notes Summarizer** | Parses raw meeting notes or conversation transcripts | Executive Summary, Key Decisions, Action Items with Assignees and Deadlines |
+| **AI Task Planner** | Breaks high-level objectives into prioritized workflows | Eisenhower Matrix or sequential timeline with time estimates and dependencies |
+| **AI Research Assistant** | Synthesizes industry trends, technical docs, and competitive queries | Key takeaways, SWOT analysis, and structured bullet breakdowns |
+| **Copilot Chatbot** | Real-time interactive conversational partner | Contextual task handling, drafting, rewriting, and brainstorming |
+
+---
+
+### Tech Stack
+
+* **Frontend Framework:** React 18 / Next.js (TypeScript)
+* **Styling & Icons:** Tailwind CSS, Lucide React
+* **State Management:** React Hooks / Zustand
+* **AI Integration:** OpenAI API / Anthropic Claude / Gemini REST API endpoints
+* **Markdown Rendering:** `react-markdown` with `remark-gfm`
+
+---
+
+### Prompt Engineering Architecture
+
+Each module utilizes a strict system prompt architecture to ensure deterministic, hallucination-resistant outputs:
+
+```typescript
+// Example: Meeting Summarizer Prompt Schema
+export const MEETING_SUMMARIZER_PROMPT = (transcript: string) => `
+You are an executive operational assistant. Analyze the following meeting transcript:
+
+"""
+${transcript}
+"""
+
+Format your response strictly using this Markdown template:
+## 1. Executive Summary (Max 3 sentences)
+## 2. Key Decisions Made
+- [Decision] (Rationale if stated)
+## 3. Action Item Matrix
+| Action Item | Assignee | Priority (High/Med/Low) | Deadline |
+|---|---|---|---|
+`;
+
+```
+
+---
+
+### Getting Started
+
+#### Prerequisites
+
+* Node.js `>= 18.0.0`
+* npm `>= 9.0.0` or pnpm `>= 8.0.0`
+
+#### Installation
+
+```bash
+# 1. Clone repository
+git clone https://github.com/your-org/ai-workplace-assistant.git
+cd ai-workplace-assistant
+
+# 2. Install dependencies
+npm install
+
+# 3. Configure environment variables
+cp .env.example .env.local
+
+```
+
+#### Environment Variables (`.env.local`)
+
+```ini
+VITE_AI_API_KEY=your_api_key_here
+VITE_AI_MODEL=gpt-4o-mini
+
+```
+
+#### Running the App
+
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+```
+
+---
+
+### Compliance & Safety Notice
+
+> **Disclaimer:** AI-generated content may contain inaccuracies and requires human verification prior to client distribution or executive sign-off.
